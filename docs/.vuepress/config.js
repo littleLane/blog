@@ -1,6 +1,7 @@
 module.exports = {
     title: 'LittleLane', 
     description: 'LittleLane的博客',
+    base: '/blog/',
     head: [
         ['link', { rel: 'manifest', href: '/manifest.json' }],
         ['meta', { name: 'theme-color', content: '#3eaf7c' }],
