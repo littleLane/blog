@@ -1,7 +1,7 @@
 {
     "name": "little-blog",
     "version": "1.0.0",
-    "description": "",
+    "description": "一个基于 vuepress 构建的博客系统!",
     "main": "index.js",
     "directories": {
         "doc": "docs"
@@ -12,7 +12,7 @@
         "deploy": "bash deploy.sh"
     },
     "keywords": [],
-    "author": "",
+    "author": "littleLane",
     "license": "ISC",
     "devDependencies": {
         "vuepress-theme-vue": "^1.1.0"
