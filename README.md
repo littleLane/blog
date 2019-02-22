@@ -1,4 +1,4 @@
-<p style="text-align: center">
+<p align="center">
   <a href="https://littlelane.github.io/blog/" target="_blank">littleLane's blog</a>
 </p>
 
