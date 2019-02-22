@@ -1,0 +1,92 @@
+/**
+ * Welcome to your Workbox-powered service worker!
+ *
+ * You'll need to register this file in your web app and you should
+ * disable HTTP caching for this file too.
+ * See https://goo.gl/nhQhGp
+ *
+ * The rest of the code is auto-generated. Please don't update this file
+ * directly; instead, make changes to your Workbox build configuration
+ * and re-run your build process.
+ * See https://goo.gl/2aRDsh
+ */
+
+importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
+
+/**
+ * The workboxSW.precacheAndRoute() method efficiently caches and responds to
+ * requests for URLs in the manifest.
+ * See https://goo.gl/S9QRab
+ */
+self.__precacheManifest = [
+  {
+    "url": "404.html",
+    "revision": "0b2d67b53c9d0356dc2803b756268d41"
+  },
+  {
+    "url": "about-me/index.html",
+    "revision": "2ab8dc733cc100edee7c2ab9a7cc8a0f"
+  },
+  {
+    "url": "assets/css/0.styles.c28978b3.css",
+    "revision": "120739f0651bd0687d6dea129b6696c9"
+  },
+  {
+    "url": "assets/img/search.83621669.svg",
+    "revision": "83621669651b9a3d4bf64d1a670ad856"
+  },
+  {
+    "url": "assets/js/2.ae0495de.js",
+    "revision": "26c0d21f8bf42c84a70ad5d8f694b7a3"
+  },
+  {
+    "url": "assets/js/3.f12f18d1.js",
+    "revision": "faf3e3df0833bbd5d0768780a017a363"
+  },
+  {
+    "url": "assets/js/4.b6bfc73b.js",
+    "revision": "a27a66f0fa5ef8e3f366deccc619a5dd"
+  },
+  {
+    "url": "assets/js/5.be87e03e.js",
+    "revision": "9c08cf30f0bf169f798d84cdaab18a71"
+  },
+  {
+    "url": "assets/js/6.d28ae7b8.js",
+    "revision": "6a75372fbe75a49076b8b0a21b641f7a"
+  },
+  {
+    "url": "assets/js/7.2d59abf1.js",
+    "revision": "1cbbc651635bd574592dc49916e61b89"
+  },
+  {
+    "url": "assets/js/app.a49cb7a2.js",
+    "revision": "4469328ff47ed6e58192c30d91f90073"
+  },
+  {
+    "url": "daily/index.html",
+    "revision": "e88e85cfc9d7d3914f6a58dc32197b01"
+  },
+  {
+    "url": "index.html",
+    "revision": "ea73a207d03406e56f4df9b89c249f3e"
+  },
+  {
+    "url": "serial/index.html",
+    "revision": "8d7755318a2b3322b4c3c84779d39266"
+  }
+].concat(self.__precacheManifest || []);
+workbox.precaching.suppressWarnings();
+workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
+addEventListener('message', event => {
+  const replyPort = event.ports[0]
+  const message = event.data
+  if (replyPort && message && message.type === 'skip-waiting') {
+    event.waitUntil(
+      self.skipWaiting().then(
+        () => replyPort.postMessage({ error: null }),
+        error => replyPort.postMessage({ error })
+      )
+    )
+  }
+})
