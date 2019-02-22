@@ -1,5 +1,7 @@
-<p align="center">
-  <a href="https://littlelane.github.io/blog/" target="_blank">littleLane's blog</a>
+<p align="center" fontSize="50px">
+  <a href="https://littlelane.github.io/blog/" target="_blank">
+    <font size=50>littleLane's blog</font>
+  </a>
 </p>
 
 ## 起源
