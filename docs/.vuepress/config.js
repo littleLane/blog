@@ -31,27 +31,22 @@ module.exports = {
             }
         ],
         sidebar: {
-
+            '/daily/': [
+                {
+                    title: '日志类',
+                    collapsable: false,
+                    children: [
+                        '',
+                    ]
+                },
+                {
+                    title: 'Group 1',
+                    collapsable: false,
+                    children: [
+                      '/'
+                    ]
+                },
+            ]
         }
     }
 }
-
-function genSidebarConfig (title) {
-    return [
-        {
-            title,
-            collapsable: false,
-            children: [
-                '',
-                'getting-started',
-                'basic-config',
-                'assets',
-                'markdown',
-                'using-vue',
-                'custom-themes',
-                'i18n',
-                'deploy'
-            ]
-        }
-    ]
-  }
