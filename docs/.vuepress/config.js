@@ -31,7 +31,9 @@ module.exports = {
       {
         title: 'JavaScript',
         collapsable: false,
-        children: ['']
+        children: [
+          '/JavaScript/0x00.md',
+        ]
       },
       {
         title: 'DSA',
