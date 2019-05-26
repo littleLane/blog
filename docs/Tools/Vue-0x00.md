@@ -23,19 +23,19 @@
 
 所谓单向数据流：就是数据只能通过 props 由父组件流向子组件，而子组件并不能通过修改 props 传过来的数据修改父组件的相应状态。至于为什么这样做，Vue 官网做出了解释：
 
-_**所有的 prop 都使得其父子 prop 之间形成了一个****单向下行绑定****：父级 prop 的更新会向下流动到子组件中，但是反过来则不行。这样会防止从子组件意外改变父级组件的状态，从而导致你的应用的数据流向难以理解。**_<br />_<br />_**额外的，每次父级组件发生更新时，子组件中所有的 prop 都将会刷新为最新的值。这意味着你不应该在一个子组件内部改变 prop。如果你这样做了，Vue 会在浏览器的控制台中发出警告。**_<br />_<br />——**_ _**[**_Vue 官网_**](https://cn.vuejs.org/v2/guide/components-props.html)
+_**所有的 prop 都使得其父子 prop 之间形成了一个****单向下行绑定****：父级 prop 的更新会向下流动到子组件中，但是反过来则不行。这样会防止从子组件意外改变父级组件的状态，从而导致你的应用的数据流向难以理解。**_<br />_<br />_**额外的，每次父级组件发生更新时，子组件中所有的 prop 都将会刷新为最新的值。这意味着你不应该在一个子组件内部改变 prop。如果你这样做了，Vue 会在浏览器的控制台中发出警告。**_<br />_<br />——[**_Vue 官网_**](https://cn.vuejs.org/v2/guide/components-props.html)
 
 正因为这个特性，于是就有了对应的 $emit。$emit 用来触发当前实例上的事件。对此，我们可以在父组件自定义一个处理接受变化状态的逻辑，然后在子组件中如若相关的状态改变时，就触发父组件的逻辑处理事件。
 
-```jsx
+```javascript
 // 父组件
 Vue.component('parent', {
-  template:`
-		<div>
-			<p>this is parent component!</p>
-			<child :message="message" v-on:getChildData="getChildData"></child>
-		</div>
-	`,
+  template: `
+    <div>
+      <p>this is parent component!</p>
+      <child :message="message" v-on:getChildData="getChildData"></child>
+    </div>
+  `,
   data() {
     return {
       message: 'hello'
@@ -52,10 +52,10 @@ Vue.component('parent', {
 // 子组件
 Vue.component('child', {
   template:`
-		<div>
-			<input type="text" v-model="myMessage" @input="passData(myMessage)">
-		</div>
-	`,
+    <div>
+      <input type="text" v-model="myMessage" @input="passData(myMessage)">
+    </div>
+  `,
   /**
    * 得到父组件传递过来的数据
    * 这里的定义最好是写成数据校验的形式，免得得到的数据是我们意料之外的
@@ -86,10 +86,10 @@ Vue.component('child', {
 var app=new Vue({
   el: '#app',
   template: `
-		<div>
-			<parent />
-		</div>
-	`
+    <div>
+      <parent />
+    </div>
+  `
 });
 ```
 
@@ -108,11 +108,11 @@ var app=new Vue({
 // 组件A
 Vue.component('A', {
   template: `
-		<div>
-			<p>this is parent component!</p>
-			<B :messagec="messagec" :message="message" v-on:getCData="getCData" v-on:getChildData="getChildData(message)"></B>
-		</div>
-	`,
+    <div>
+      <p>this is parent component!</p>
+      <B :messagec="messagec" :message="message" v-on:getCData="getCData" v-on:getChildData="getChildData(message)"></B>
+    </div>
+  `,
   data() {
     return {
       message: 'hello',
@@ -135,13 +135,13 @@ Vue.component('A', {
 // 组件B
 Vue.component('B', {
   template: `
-		<div>
-			<input type="text" v-model="mymessage" @input="passData(mymessage)"> 
-			<!-- C组件中能直接触发 getCData 的原因在于：B组件调用 C组件时，使用 v-on 绑定了 $listeners 属性 -->
-			<!-- 通过v-bind 绑定 $attrs 属性，C组件可以直接获取到 A组件中传递下来的 props（除了 B组件中 props声明的） -->
-			<C v-bind="$attrs" v-on="$listeners"></C>
-		</div>
-	`,
+    <div>
+      <input type="text" v-model="mymessage" @input="passData(mymessage)"> 
+      <!-- C组件中能直接触发 getCData 的原因在于：B组件调用 C组件时，使用 v-on 绑定了 $listeners 属性 -->
+      <!-- 通过v-bind 绑定 $attrs 属性，C组件可以直接获取到 A组件中传递下来的 props（除了 B组件中 props声明的） -->
+      <C v-bind="$attrs" v-on="$listeners"></C>
+    </div>
+  `,
   /**
    * 得到父组件传递过来的数据
    * 这里的定义最好是写成数据校验的形式，免得得到的数据是我们意料之外的
@@ -171,10 +171,10 @@ Vue.component('B', {
 // 组件C
 Vue.component('C', {
   template: `
-		<div>
-			<input type="text" v-model="$attrs.messagec" @input="passCData($attrs.messagec)">
-		</div>
-	`,
+    <div>
+      <input type="text" v-model="$attrs.messagec" @input="passCData($attrs.messagec)">
+    </div>
+  `,
   methods: {
     passCData(val) {
       // 触发父组件A中的事件
@@ -186,10 +186,10 @@ Vue.component('C', {
 var app=new Vue({
   el:'#app',
   template: `
-		<div>
-			<A />
-		</div>
-	`
+    <div>
+      <A />
+    </div>
+  `
 });
 ```
 
@@ -216,11 +216,11 @@ EventBus 通过新建一个 Vue 事件 bus 对象，然后通过 bus.$emit 触�
 // 组件 A
 Vue.component('A', {
   template: `
-		<div>
-			<p>this is A component!</p>
-			<input type="text" v-model="mymessage" @input="passData(mymessage)"> 
-		</div>
-	`,
+    <div>
+      <p>this is A component!</p>
+      <input type="text" v-model="mymessage" @input="passData(mymessage)"> 
+    </div>
+  `,
   data() {
     return {
       mymessage: 'hello brother1'
@@ -237,11 +237,11 @@ Vue.component('A', {
 // 组件 B
 Vue.component('B', {
   template:`
-		<div>
-			<p>this is B component!</p>
-			<p>组件A 传递过来的数据：{{brothermessage}}</p>
-		</div>
-	`,
+    <div>
+      <p>this is B component!</p>
+      <p>组件A 传递过来的数据：{{brothermessage}}</p>
+    </div>
+  `,
   data() {
     return {
       mymessage: 'hello brother2',
@@ -265,11 +265,11 @@ Vue.prototype.$EventBus = EventBus;
 const app = new Vue({
   el: '#app',
   template: `
-		<div>
-			<A />
-			<B />
-		</div>
-	`
+    <div>
+      <A />
+      <B />
+    </div>
+  `
 });
 ```
 
@@ -292,11 +292,11 @@ const app = new Vue({
 // 定义 parent 组件
 Vue.component('parent', {
   template: `
-		<div>
-			<p>this is parent component!</p>
-			<child></child>
-		</div>
-	`,
+    <div>
+      <p>this is parent component!</p>
+      <child></child>
+    </div>
+  `,
   provide: {
     for:'test'
   },
@@ -310,10 +310,10 @@ Vue.component('parent', {
 // 定义 child 组件
 Vue.component('child', {
   template: `
-		<div>
-			<input type="tet" v-model="mymessage"> 
-		</div>
-	`,
+    <div>
+      <input type="tet" v-model="mymessage"> 
+    </div>
+  `,
   inject: ['for'],	// 得到父组件传递过来的数据
   data(){
     return {
@@ -325,10 +325,10 @@ Vue.component('child', {
 const app = new Vue({
   el: '#app',
   template: `
-		<div>
-			<parent />
-		</div>
-	`
+    <div>
+      <parent />
+    </div>
+  `
 });
 ```
 
@@ -355,12 +355,12 @@ const app = new Vue({
 // 定义 parent 组件
 Vue.component('parent', {
   template: `
-		<div>
-			<p>this is parent component!</p>
-			<p>{{message}}</p>
-			<child v-model="message"></child>
-		</div>
-	`,
+    <div>
+      <p>this is parent component!</p>
+      <p>{{message}}</p>
+      <child v-model="message"></child>
+    </div>
+  `,
   data() {
     return {
       message: 'hello'
@@ -371,10 +371,10 @@ Vue.component('parent', {
 // 定义 child 组件
 Vue.component('child', {
   template: `
-		<div>
-			<input type="text" v-model="mymessage" @change="changeValue"> 
-		</div>
-	`,
+    <div>
+      <input type="text" v-model="mymessage" @change="changeValue"> 
+    </div>
+  `,
   props: {
     value: String, // v-model 会自动传递一个字段为 value 的 props 属性
   },
@@ -391,11 +391,11 @@ Vue.component('child', {
 });
 
 const app = new Vue({
-	el: '#app',
-	template: `
-  	<div>
-  		<parent />
-  	</div>
+  el: '#app',
+  template: `
+    <div>
+      <parent />
+    </div>
   `
 });
 ```
@@ -420,12 +420,12 @@ const app = new Vue({
 // 定义 parent 组件
 Vue.component('parent', {
   template: `
-		<div>
-			<p>this is parent component!</p>
-			<button @click="changeChildValue">test</button>
-			<child />
-		</div>
-	`,
+    <div>
+      <p>this is parent component!</p>
+      <button @click="changeChildValue">test</button>
+      <child />
+    </div>
+  `,
   data() {
     return {
       message: 'hello'
@@ -441,10 +441,10 @@ Vue.component('parent', {
 // 定义 child 组件
 Vue.component('child', {
   template:`
-		<div>
-			<input type="text" v-model="mymessage" @change="changeValue" /> 
-		</div>
-	`,
+    <div>
+      <input type="text" v-model="mymessage" @change="changeValue" /> 
+    </div>
+  `,
   data() {
     return {
       mymessage: this.$parent.message
@@ -460,10 +460,10 @@ Vue.component('child', {
 const app = new Vue({
   el:	'#app',
   template: `
-		<div>
-			<parent />
-		</div>
-`
+    <div>
+      <parent />
+    </div>
+  `
 });
 ```
 

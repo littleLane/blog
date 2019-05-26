@@ -50,7 +50,9 @@ module.exports = {
         collapsable: false,
         children: [
           '/Tools/Vue-0x00.md',
-          '/Tools/Vue-0x01.md'
+          '/Tools/Vue-0x01.md',
+          '/Tools/Vue-0x02.md',
+          '/Tools/Vue-0x03.md',
         ]
       },
       {

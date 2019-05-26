@@ -15,9 +15,9 @@ Vue.component('bindData', {
   template:`
     <div>
       <p>this is bindData component!</p>
-			<button @click="handleChange">change input value</button>
+      <button @click="handleChange">change input value</button>
       <input type="text" v-model="inputValue" />
-			<p>{{inputValue}}</p>
+      <p>{{inputValue}}</p>
     </div>
   `,
   data() {
@@ -47,13 +47,13 @@ const app=new Vue({
 
 上面这段示例代码通过在 input 标签上绑定 v-model 实现一个很神奇的功能：
 
-* 首先在 input 标签上通过 v-model 指令绑定 $data_（如果你还不知道 $data 这个 Vue 示例的内置属性，你可以点击_[_这里_](https://cn.vuejs.org/v2/api/#data)_） _的 inputValue 属性；
+* 首先在 input 标签上通过 v-model 指令绑定 $data_（如果你还不知道 $data 这个 Vue 示例的内置属性，你可以点击[_这里_](https://cn.vuejs.org/v2/api/#data)） 的 inputValue 属性；
 
 * 因为 $data 的 inputValue 属性有一个 hello 的初始值，所以当组件 mounted 后，input 显示的值就是 hello，同时 input 标签下的 p 标签里面显示的也是 _hello_；
 
-* 当组件显示后，向 input 中输入值，发现 input 标签下的 p 标签里面显示的是_ __input 标签当前展示的值_；
+* 当组件显示后，向 input 中输入值，发现 input 标签下的 p 标签里面显示的是 _input 标签当前展示的值_；
 
-* 最后点击 input 标签上面的 button 标签，发现 input 标签的值和 p 标签里面显示的内容同时变化了，而且_显示内容一致，都显示成了 I'm changed_。
+* 最后点击 input 标签上面的 button 标签，发现 input 标签的值和 p 标签里面显示的内容同时变化了，而且_显示内容一致，都显示成了 I'm changed。
 
 <a name="v-model"></a>
 ## v-model
@@ -69,7 +69,7 @@ const app=new Vue({
 
 * 1、从 inputValue 属性入手吧，因为 input 标签、v-model、button 标签、p 标签的唯一联系就是这个 inputValue 属性了，不信你就看看示例代码吧！
 
-* 2、因为 input 属性是定义在 $data 上的，那就是响应式数据_（如果你还不知道响应式数据是啥，你可以点击_[_这里_](https://cn.vuejs.org/v2/guide/reactivity.html#ad)_）_，根据响应式数据的特性：**当数据值被修改时，会驱动视图的变化，显示变化后的数据，**那么对应的绑定了 inputValue 属性的 p 标签显示的内容就会变化
+* 2、因为 input 属性是定义在 $data 上的，那就是响应式数据（如果你还不知道响应式数据是啥，你可以点击[_这里_](https://cn.vuejs.org/v2/guide/reactivity.html#ad)_）_，根据响应式数据的特性：当数据值被修改时，会驱动视图的变化，显示变化后的数据，那么对应的绑定了 inputValue 属性的 p 标签显示的内容就会变化
 
 * 3、当我们往 input 输入值时，p 标签显示的内容也相应的变化了，根据响应式数据的特性，这里肯定是触发了 inputValue 值的变化，并且将 input 此时的值赋值给了 inputValue，才导致了 p 标签内容的变化；
 
@@ -93,9 +93,9 @@ Vue.component('bindData1', {
   template:`
     <div>
       <p>this is bindData1 component!</p>
-			<button @click="handleChange">change input value</button>
+      <button @click="handleChange">change input value</button>
       <input type="text" :value="inputValue" @change="handleInputChange" />
-			<p>input 中的值为：{{inputValue}}</p>
+      <p>input 中的值为：{{inputValue}}</p>
     </div>
   `,
   data() {
@@ -182,16 +182,16 @@ Vue.component('checkbox', {
 // 使用自定义组件 
 Vue.component('useCheckbox', {
   template: `
-		<checkbox v-model="checkStatus" @change="handleChange"></checkbox>
-	`,
+    <checkbox v-model="checkStatus" @change="handleChange"></checkbox>
+  `,
   data() {
-  	return {
-    	checkStatus: false
+    return {
+      checkStatus: false
     }
   },
   methods: {
-  	handleChange(checked) {
-    	// do something
+    handleChange(checked) {
+      // do something
     }
   }
 });
