@@ -55,6 +55,8 @@ module.exports = {
           '/Tools/Vue-0x02.md',
           '/Tools/Vue-0x03.md',
           '/Tools/Vue-0x04.md',
+          '/Tools/Vue-0x05.md',
+          '/Tools/Vue-0x06.md',
         ]
       },
       {
