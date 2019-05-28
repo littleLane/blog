@@ -33,6 +33,7 @@ module.exports = {
         collapsable: false,
         children: [
           '/JavaScript/0x00.md',
+          '/JavaScript/0x01.md',
         ]
       },
       {
