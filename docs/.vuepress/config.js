@@ -60,6 +60,7 @@ module.exports = {
           '/Tools/Vue-0x07.md',
           '/Tools/Vue-0x08.md',
           '/Tools/Vue-0x09.md',
+          '/Tools/Vue-0x0A.md',
         ]
       },
       {
