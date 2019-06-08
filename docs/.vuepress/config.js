@@ -34,6 +34,7 @@ module.exports = {
         children: [
           '/JavaScript/0x00.md',
           '/JavaScript/0x01.md',
+          '/JavaScript/0x02.md',
         ]
       },
       {
