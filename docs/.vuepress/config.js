@@ -37,6 +37,7 @@ module.exports = {
           '/JavaScript/0x02.md',
           '/JavaScript/0x03.md',
           '/JavaScript/0x04.md',
+          '/JavaScript/0x05.md',
         ]
       },
       {
