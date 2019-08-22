@@ -76,6 +76,7 @@ module.exports = {
         children: [
           '/DailyQuestion/0x00.md',
           '/DailyQuestion/0x01.md',
+          '/DailyQuestion/0x02.md',
         ]
       },
       {
