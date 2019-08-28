@@ -78,6 +78,7 @@ module.exports = {
           '/DailyQuestion/0x01.md',
           '/DailyQuestion/0x02.md',
           '/DailyQuestion/0x03.md',
+          '/DailyQuestion/0x04.md',
         ]
       },
       {
