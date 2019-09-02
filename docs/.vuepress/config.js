@@ -88,6 +88,13 @@ module.exports = {
         title: 'BestPractices',
         collapsable: false,
         children: ['']
+      },
+      {
+        title: 'SafeOptimize',
+        collapsable: false,
+        children: [
+          '/SafeOptimize/0x00.md',
+        ]
       }
     ]
   }
