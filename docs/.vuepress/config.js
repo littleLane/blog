@@ -94,6 +94,7 @@ module.exports = {
         collapsable: false,
         children: [
           '/SafeOptimize/0x00.md',
+          '/SafeOptimize/0x01.md',
         ]
       }
     ]
