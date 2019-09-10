@@ -95,6 +95,7 @@ module.exports = {
         children: [
           '/SafeOptimize/0x00.md',
           '/SafeOptimize/0x01.md',
+          '/SafeOptimize/0x02.md',
         ]
       }
     ]
