@@ -98,6 +98,7 @@ module.exports = {
           '/SafeOptimize/0x02.md',
           '/SafeOptimize/0x03.md',
           '/SafeOptimize/0x04.md',
+          '/SafeOptimize/0x05.md',
         ]
       }
     ]
