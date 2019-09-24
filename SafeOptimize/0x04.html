@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>深入函数节流 | LittleLane</title>
+    <meta name="description" content="LittleLane的博客">
+    <link rel="manifest" href="/blog/manifest.json">
+  <meta name="theme-color" content="#3eaf7c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="msapplication-TileColor" content="#000000">
+    
+    <link rel="preload" href="/blog/assets/css/0.styles.fb084c9e.css" as="style"><link rel="preload" href="/blog/assets/js/app.8628b115.js" as="script"><link rel="preload" href="/blog/assets/js/31.1195eb55.js" as="script"><link rel="prefetch" href="/blog/assets/js/10.7c696101.js"><link rel="prefetch" href="/blog/assets/js/11.0789c73b.js"><link rel="prefetch" href="/blog/assets/js/12.461a1f52.js"><link rel="prefetch" href="/blog/assets/js/13.fe3225de.js"><link rel="prefetch" href="/blog/assets/js/14.90707970.js"><link rel="prefetch" href="/blog/assets/js/15.fe5adc74.js"><link rel="prefetch" href="/blog/assets/js/16.0ebb9344.js"><link rel="prefetch" href="/blog/assets/js/17.9ccc244d.js"><link rel="prefetch" href="/blog/assets/js/18.3280c375.js"><link rel="prefetch" href="/blog/assets/js/19.497df057.js"><link rel="prefetch" href="/blog/assets/js/2.a2883561.js"><link rel="prefetch" href="/blog/assets/js/20.32678c14.js"><link rel="prefetch" href="/blog/assets/js/21.1423f536.js"><link rel="prefetch" href="/blog/assets/js/22.f2e999a8.js"><link rel="prefetch" href="/blog/assets/js/23.ba5456dd.js"><link rel="prefetch" href="/blog/assets/js/24.506605c5.js"><link rel="prefetch" href="/blog/assets/js/25.a207ec0f.js"><link rel="prefetch" href="/blog/assets/js/26.2ef516a2.js"><link rel="prefetch" href="/blog/assets/js/27.0fc3d0a8.js"><link rel="prefetch" href="/blog/assets/js/28.857b9f54.js"><link rel="prefetch" href="/blog/assets/js/29.ddc54fa4.js"><link rel="prefetch" href="/blog/assets/js/3.03546f42.js"><link rel="prefetch" href="/blog/assets/js/30.d40e6ea0.js"><link rel="prefetch" href="/blog/assets/js/32.8de16a5a.js"><link rel="prefetch" href="/blog/assets/js/33.7cd7fe57.js"><link rel="prefetch" href="/blog/assets/js/34.738f5bc5.js"><link rel="prefetch" href="/blog/assets/js/35.77dd47e7.js"><link rel="prefetch" href="/blog/assets/js/36.352ec5b1.js"><link rel="prefetch" href="/blog/assets/js/37.13db91e9.js"><link rel="prefetch" href="/blog/assets/js/38.c6fc1157.js"><link rel="prefetch" href="/blog/assets/js/39.8c2096af.js"><link rel="prefetch" href="/blog/assets/js/4.230e5792.js"><link rel="prefetch" href="/blog/assets/js/40.b2aa99ad.js"><link rel="prefetch" href="/blog/assets/js/41.b6c8edd8.js"><link rel="prefetch" href="/blog/assets/js/42.44ad0cc7.js"><link rel="prefetch" href="/blog/assets/js/43.fb6bd8dc.js"><link rel="prefetch" href="/blog/assets/js/44.f45a0bfd.js"><link rel="prefetch" href="/blog/assets/js/45.3ac2cc18.js"><link rel="prefetch" href="/blog/assets/js/46.763aa6cb.js"><link rel="prefetch" href="/blog/assets/js/47.949030e9.js"><link rel="prefetch" href="/blog/assets/js/48.54ad9db1.js"><link rel="prefetch" href="/blog/assets/js/5.e8583280.js"><link rel="prefetch" href="/blog/assets/js/6.34b724f6.js"><link rel="prefetch" href="/blog/assets/js/7.1c9ebf74.js"><link rel="prefetch" href="/blog/assets/js/8.928845ca.js"><link rel="prefetch" href="/blog/assets/js/9.aac799a8.js">
+    <link rel="stylesheet" href="/blog/assets/css/0.styles.fb084c9e.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/blog/" class="home-link router-link-active"><!----> <span class="site-name">LittleLane</span></a> <div class="links" style="max-width:nullpx;"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/blog/AboutMe/" class="nav-link">关于我</a></div> <a href="https://github.com/vuejs/vuepress" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <div class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/blog/AboutMe/" class="nav-link">关于我</a></div> <a href="https://github.com/vuejs/vuepress" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav> <div class="carbon-ads"></div> <ul class="sidebar-links"><li><div class="sidebar-group first"><p class="sidebar-heading"><span>CSS</span> <!----></p> <ul class="sidebar-group-items"><li><a href="/blog/" class="sidebar-link">Home</a></li></ul></div></li><li><div class="sidebar-group"><p class="sidebar-heading"><span>JavaScript</span> <!----></p> <ul class="sidebar-group-items"><li><a href="/blog/JavaScript/0x00.html" class="sidebar-link">函数一等公民</a></li><li><a href="/blog/JavaScript/0x01.html" class="sidebar-link">回调函数详解</a></li><li><a href="/blog/JavaScript/0x02.html" class="sidebar-link">高阶函数</a></li><li><a href="/blog/JavaScript/0x03.html" class="sidebar-link">重学 new 操作符</a></li><li><a href="/blog/JavaScript/0x04.html" class="sidebar-link">重学 call、apply</a></li><li><a href="/blog/JavaScript/0x05.html" class="sidebar-link">重学 bind</a></li><li><a href="/blog/JavaScript/0x06.html" class="sidebar-link">重学 Array 之基础概念</a></li><li><a href="/blog/JavaScript/0x07.html" class="sidebar-link">重学 Array 之元素增删</a></li></ul></div></li><li><div class="sidebar-group"><p class="sidebar-heading"><span>DSA</span> <!----></p> <ul class="sidebar-group-items"><li><a href="/blog/" class="sidebar-link">Home</a></li></ul></div></li><li><div class="sidebar-group"><p class="sidebar-heading"><span>Node.js</span> <!----></p> <ul class="sidebar-group-items"><li><a href="/blog/" class="sidebar-link">Home</a></li></ul></div></li><li><div class="sidebar-group"><p class="sidebar-heading"><span>Tools</span> <!----></p> <ul class="sidebar-group-items"><li><a href="/blog/Tools/Vue-0x00.html" class="sidebar-link">Vue 组件通信详解</a></li><li><a href="/blog/Tools/Vue-0x01.html" class="sidebar-link">v-model 实现原理</a></li><li><a href="/blog/Tools/Vue-0x02.html" class="sidebar-link">Vue $dispatch 和 $broadcast</a></li><li><a href="/blog/Tools/Vue-0x03.html" class="sidebar-link">Vue v-model 源码解析</a></li><li><a href="/blog/Tools/Vue-0x04.html" class="sidebar-link">v-model 后续 input and change</a></li><li><a href="/blog/Tools/Vue-0x05.html" class="sidebar-link">Vue 生命周期详解</a></li><li><a href="/blog/Tools/Vue-0x06.html" class="sidebar-link">Vue.use() 做了什么？</a></li><li><a href="/blog/Tools/Vue-0x07.html" class="sidebar-link">Vue Router 实现剖析之一</a></li><li><a href="/blog/Tools/Vue-0x08.html" class="sidebar-link">Vue Router 实现剖析之二</a></li><li><a href="/blog/Tools/Vue-0x09.html" class="sidebar-link">Vue Router 实现剖析之三</a></li><li><a href="/blog/Tools/Vue-0x0A.html" class="sidebar-link">Vue Router 实现剖析之五</a></li><li><a href="/blog/Tools/Vue-0x0B.html" class="sidebar-link">数据响应式初探</a></li></ul></div></li><li><div class="sidebar-group"><p class="sidebar-heading"><span>DailyQuestion</span> <!----></p> <ul class="sidebar-group-items"><li><a href="/blog/DailyQuestion/0x00.html" class="sidebar-link">['1', '2', '3'].map(parseInt)</a></li><li><a href="/blog/DailyQuestion/0x01.html" class="sidebar-link">git ssh Permission denied</a></li><li><a href="/blog/DailyQuestion/0x02.html" class="sidebar-link">0.1 + 0.2 !== 0.3</a></li><li><a href="/blog/DailyQuestion/0x03.html" class="sidebar-link">聊聊 a 标签 rel 属性值</a></li><li><a href="/blog/DailyQuestion/0x04.html" class="sidebar-link">浏览器路由 API 详解</a></li><li><a href="/blog/DailyQuestion/0x05.html" class="sidebar-link">VSCode nvm 问题</a></li><li><a href="/blog/DailyQuestion/0x06.html" class="sidebar-link">涉及 new 、this、以及原型链经典习题</a></li><li><a href="/blog/DailyQuestion/0x07.html" class="sidebar-link">DBeaver MySQL 问题集</a></li></ul></div></li><li><div class="sidebar-group"><p class="sidebar-heading"><span>BestPractices</span> <!----></p> <ul class="sidebar-group-items"><li><a href="/blog/" class="sidebar-link">Home</a></li></ul></div></li><li><div class="sidebar-group"><p class="sidebar-heading open"><span>SafeOptimize</span> <!----></p> <ul class="sidebar-group-items"><li><a href="/blog/SafeOptimize/0x00.html" class="sidebar-link">JavaScript 加载与执行</a></li><li><a href="/blog/SafeOptimize/0x01.html" class="sidebar-link">函数节流</a></li><li><a href="/blog/SafeOptimize/0x02.html" class="sidebar-link">XSS（Cross-Site Scripting）</a></li><li><a href="/blog/SafeOptimize/0x03.html" class="sidebar-link">CSRF(Cross-Site Request Forgery)</a></li><li><a href="/blog/SafeOptimize/0x04.html" class="active sidebar-link">深入函数节流</a></li><li><a href="/blog/SafeOptimize/0x05.html" class="sidebar-link">js 异步加载之 async 和 defer</a></li></ul></div></li></ul> </div> <div class="page"> <div class="content"><h1 id="深入函数节流"><a href="#深入函数节流" aria-hidden="true" class="header-anchor">#</a> 深入函数节流</h1> <p>在**<a href="https://www.yuque.com/littlelane/security-optimize/bskcp8" target="_blank" rel="noopener noreferrer">【优化0x01】函数节流<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>**专栏，我们说到了函数节流解决的问题、节流的意义以及使用场景，最后利用时间戳和定时器这两种方式分别实现了简单的函数节流器，它们的原理分别如下：</p> <ul><li>时间戳：通过计算得到的前后两个时间戳的时间间隔，和指定的延迟时间作比较，如果时间间隔小于延迟时间，说明逻辑函数还没到时间执行，所以忽略；如果时间间隔大于或等于延迟时间，说明逻辑函数已到达执行时间点，执行函数并记录当前时间戳，以便下次进行重复的操作。</li> <li>定时器：声明一个变量用于保存定时器，如果这个变量值不存在，说明当前没有任务等待执行，这时就生成一个定时任务，并将值赋值给这个变量，以便后续的逻辑判断；如果这个变量值存在，就不做任何处理，直到定时器变量值不存在，这时就再次生成一个定时任务。注意：为了防止内存泄漏，在定时任务逻辑中要做清除定时器的操作，还有必须要变量置 null，以免影响后面的逻辑判断。</li></ul> <p>在专栏的最后，我们还对两种节流实现进行了分析，发现它们的实现多多少少会有一个问题：</p> <ul><li>时间戳和定时器这两种方式的实现，在事件初次触发时都不会立即执行逻辑函数</li> <li>时间戳方式的实现无法响应最后一次事件的回调，定时器方式的实现始终会响应最后一次事件的回调</li></ul> <p>为了解决上面说到的问题，我们必须将两种方式结合起来，以实现一个功能比较全面的函数节流器。</p> <p>由于 underscore.js 已经实现了比较高级的函数节流器，我们不妨先阅读一下源码，以深入了解具体实现逻辑。源代码如下：</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token comment">// Returns a function, that, when invoked, will only be triggered at most once</span>
+<span class="token comment">// during a given window of time. Normally, the throttled function will run</span>
+<span class="token comment">// as much as it can, without ever going more than once per `wait` duration;</span>
+<span class="token comment">// but if you'd like to disable the execution on the leading edge, pass</span>
+<span class="token comment">// `{leading: false}`. To disable execution on the trailing edge, ditto.</span>
+<span class="token comment">// func 表示实际我们需要进行节流的函数，也就是我们实际的业务逻辑函数</span>
+<span class="token comment">// wait 表示函数执行的时间间隔</span>
+<span class="token comment">// options 配置对象，可包含 leading 和 trailing 两个参数</span>
+<span class="token comment">// 当 leading 为 false 时，表示忽略事件刚开始的回调</span>
+<span class="token comment">// 当 trailing 为 false 时，表示忽略事件最后一次的回调</span>
+_<span class="token punctuation">.</span><span class="token function-variable function">throttle</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">func<span class="token punctuation">,</span> wait<span class="token punctuation">,</span> options</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// timeout 用来保存定时器对象</span>
+  <span class="token comment">// context 保存函数执行的上下文</span>
+  <span class="token comment">// args 用来保存函数执行所需的额外参数</span>
+  <span class="token comment">// result 用来保存函数执行的结果，便于返回</span>
+  <span class="token keyword">var</span> timeout<span class="token punctuation">,</span> context<span class="token punctuation">,</span> args<span class="token punctuation">,</span> result<span class="token punctuation">;</span>
+  
+  <span class="token comment">// 由于是时间戳和定时器的结合版本</span>
+  <span class="token comment">// 这里声明一个变量来保存前一次响应的时间戳</span>
+  <span class="token keyword">var</span> previous <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>options<span class="token punctuation">)</span> options <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">var</span> <span class="token function-variable function">later</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 当设置 { leading: false } 时</span>
+    <span class="token comment">// 每次触发回调函数后设置 previous 为 0，不然为当前时间</span>
+    previous <span class="token operator">=</span> options<span class="token punctuation">.</span>leading <span class="token operator">===</span> <span class="token boolean">false</span> <span class="token operator">?</span> <span class="token number">0</span> <span class="token punctuation">:</span> _<span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token comment">// 清除定时器变量</span>
+    timeout <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+    
+    <span class="token comment">// 执行函数</span>
+    result <span class="token operator">=</span> <span class="token function">func</span><span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span> args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token comment">// 本次 func 函数执行已经完成，清除上下文变量 context 和执行函数所需的参数 args</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>timeout<span class="token punctuation">)</span> context <span class="token operator">=</span> args <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// 每次触发事件回调都执行这个函数</span>
+  <span class="token comment">// 函数内判断是否执行 func</span>
+  <span class="token keyword">var</span> <span class="token function-variable function">throttled</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 记录当前时间</span>
+    <span class="token keyword">var</span> now <span class="token operator">=</span> _<span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token comment">// previous 为 0 表示第一次执行，之后为上一次时间戳</span>
+    <span class="token comment">// 当 options.leading === false 时，表示忽略第一次事件的回调</span>
+    <span class="token comment">// 此时设置 previous 为当前值，表示刚执行过，本次就不执行了</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>previous <span class="token operator">&amp;&amp;</span> options<span class="token punctuation">.</span>leading <span class="token operator">===</span> <span class="token boolean">false</span><span class="token punctuation">)</span> previous <span class="token operator">=</span> now<span class="token punctuation">;</span>
+    
+    <span class="token comment">// 计算前后时间间隔，通过和 wait 计算得到好需要等待多久，执行下一次的回调</span>
+    <span class="token keyword">var</span> remaining <span class="token operator">=</span> wait <span class="token operator">-</span> <span class="token punctuation">(</span>now <span class="token operator">-</span> previous<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    context <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+    args <span class="token operator">=</span> arguments<span class="token punctuation">;</span>
+    
+    <span class="token comment">// 要么是到了间隔时间，随即触发方法（remaining &lt;= 0）</span>
+    <span class="token comment">// 要么是没有传入 {leading: false}，且第一次触发回调，即立即触发，</span>
+    <span class="token comment">// 此时 previous 为 0，wait - (now - previous) 也满足 &lt;= 0</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>remaining <span class="token operator">&lt;=</span> <span class="token number">0</span> <span class="token operator">||</span> remaining <span class="token operator">&gt;</span> wait<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment">// 如果此时定时器存在就清除定时器，置空 timeout 变量</span>
+      <span class="token comment">// 因为回调函数即将触发</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>timeout<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">clearTimeout</span><span class="token punctuation">(</span>timeout<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        timeout <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+      
+      <span class="token comment">// 将 previous 值置为 now，用于下次进行比较</span>
+      previous <span class="token operator">=</span> now<span class="token punctuation">;</span>
+      
+      <span class="token comment">// 执行 func 函数</span>
+      result <span class="token operator">=</span> <span class="token function">func</span><span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span> args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      
+      <span class="token comment">// 本次 func 函数执行已经完成，清除上下文变量 context 和执行函数所需的参数 args</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>timeout<span class="token punctuation">)</span> context <span class="token operator">=</span> args <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>timeout <span class="token operator">&amp;&amp;</span> options<span class="token punctuation">.</span>trailing <span class="token operator">!==</span> <span class="token boolean">false</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment">// 定时器执行方式</span>
+      <span class="token comment">// 最后一次需要触发的情况</span>
+      <span class="token comment">// 如果已经存在一个定时器，则不会进入该分支</span>
+      <span class="token comment">// 如果 {trailing: false}，即最后一次不需要触发了，也不会进入这个分支</span>
+      <span class="token comment">// 间隔 remaining milliseconds 后触发 later 方法</span>
+      timeout <span class="token operator">=</span> <span class="token function">setTimeout</span><span class="token punctuation">(</span>later<span class="token punctuation">,</span> remaining<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token comment">// 返回执行 func 函数得到的结果</span>
+    <span class="token keyword">return</span> result<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// 用于取消当前的定时器</span>
+  throttled<span class="token punctuation">.</span><span class="token function-variable function">cancel</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">clearTimeout</span><span class="token punctuation">(</span>timeout<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    previous <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    timeout <span class="token operator">=</span> context <span class="token operator">=</span> args <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">return</span> throttled<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div><p>underscore.js 对 throttle 的实现新增了配置参数，配置参数可以配置 leading 用于表示是否享有事件刚开始的回调，trailing 用于表示是否响应事件最后一次的回调，这就可以形成三种节流函数的调用方式：默认的有头有尾；设置 { leading: false } 的方式；以及设置 { trailing: false } 的方式。但是这<strong>两个配置参数不能同时设置为 false</strong>，至于为什么，我们可以通过上面的代码进行分析：</p> <ul><li>当回调是第一次被触发时，previous 为 0，leading 为 false，此时 previous 会被立马设置为 now</li> <li>后面计算得到的 remaining 始终为 wait 值，不满足 if 逻辑，就会去尝试 else if 的判断</li> <li>trailing 也被设置为了 false，虽然 timeout 为空，也不满足判断逻辑，进不了 else if 逻辑</li> <li>最后只能原地返回 result 了，此时的 result 值又为 undefined，没有任何意义</li></ul></div> <div class="page-edit"><!----> <div class="last-updated"><span class="prefix">Last Updated: </span> <span class="time">9/12/2019, 4:33:19 PM</span></div></div> <div class="page-nav"><p class="inner"><span class="prev">
+        ←
+        <a href="/blog/SafeOptimize/0x03.html" class="prev">
+          CSRF(Cross-Site Request Forgery)
+        </a></span> <span class="next"><a href="/blog/SafeOptimize/0x05.html">
+          js 异步加载之 async 和 defer
+        </a>
+        →
+      </span></p></div> <div class="bsa-cpc-wrapper"><div class="bsa-cpc"></div></div></div> <!----></div></div>
+    <script src="/blog/assets/js/app.8628b115.js" defer></script><script src="/blog/assets/js/31.1195eb55.js" defer></script>
+  </body>
+</html>
