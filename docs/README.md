@@ -1,6 +1,7 @@
 ---
 home: true
-actionText: go ->
+heroImage: /headerPic.jpg
+actionText: Let’s get it!
 actionLink: /about
 features:
 - title: 积累
